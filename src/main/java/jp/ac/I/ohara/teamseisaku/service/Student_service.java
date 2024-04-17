@@ -53,5 +53,28 @@ public class Student_service {
 	public void delete(@NonNull Long id) {
 		this.repository.deleteById(id);
 	}
-}
+	public Studentmodel getOneBook(Long id) {
+        // idを指定して本の情報を取得する
+        Studentmodel student = this.repository.findById(id).orElseThrow();
+        // 画面返却用のFormに値を設定する
+        return student;
+    }
 
+    // 本を更新する
+    public void update(Studentmodel editStudent) {
+        // データベースに登録する値を保持するインスタンスの作成
+        System.out.println(editStudent);
+       
+        
+        // データベースを更新する
+        this.repository.save(editStudent);
+        System.out.println("aaa");
+    }
+    
+
+
+public Studentmodel getStudent(Long id) {
+	Studentmodel student = this.repository.findById(id).orElse(null);
+	return student;
+}
+}

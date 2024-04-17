@@ -17,8 +17,8 @@
             <td th:text="${student.classNum}"></td>
             
            <td>
-           	  <a class="btn btn-warning" th:href="@{/deltail/{id}(id=*{id})}">変更</a>
-			  <a class="btn btn-warning" th:href="@{/delete(id=*{id})}">削除</a>
+           	  <a class="btn btn-warning" th:href="@{/hyouji/{id}(id=${student.id})}">変更</a>
+			  <a class="btn btn-warning" th:href="@{/delete/{id}(id=*{student.id})}">削除</a>
 		   </td>
         </tr>
         
