@@ -13,7 +13,7 @@ import jp.ac.I.ohara.teamseisaku.repository.Student_repository;
 
 @Service
 @Transactional
-public class Student_service {
+public class Studentservice {
 
 	@Autowired
 	private Student_repository repository;
@@ -70,7 +70,7 @@ public class Student_service {
         this.repository.save(editStudent);
         System.out.println("aaa");
     }
-    
+   
 
 
 public Studentmodel getStudent(Long id) {

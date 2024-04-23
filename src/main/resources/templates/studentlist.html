@@ -17,7 +17,7 @@
             <td th:text="${student.classNum}"></td>
             
            <td>
-           	  <a class="btn btn-warning" th:href="@{/hyouji/{id}(id=${student.id})}">変更</a>
+           	  <a class="btn btn-warning" th:href="@{/hyoujistudent/{id}(id=${student.id})}">変更</a>
 			  <a class="btn btn-warning" th:href="@{/delete/{id}(id=*{student.id})}">削除</a>
 		   </td>
         </tr>
@@ -30,5 +30,5 @@
 <div th:unless="${studentList != null and not #lists.isEmpty(studentList)}">
     <p>データなし</p>
 </div>
-<a href="/createstudent">学生情報を入力する</a>
+<a href="/createstudent/">学生情報を入力する</a>
  

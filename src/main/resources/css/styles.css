@@ -1,0 +1,14 @@
+@charset "UTF-8";
+/* styles.css */
+
+/* フォームコントロールのマージンを設定 */
+.form-control {
+    margin-bottom: 10px;
+}
+
+/* バリデーションエラーメッセージのテキストカラーを赤に設定 */
+.invalid-feedback {
+    color: red;
+}
+
+/* その他のスタイルを追加する場合はここに追加 */

@@ -10,36 +10,23 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="student")
-public class Studentmodel {
+@Table(name="subject")
+
+
+public class Subjectmodel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private long id;
 
-    @Column(name="no",length = 10, nullable = false)
-    private String no;
-
-
     @Column(name="name",length = 10, nullable = true)
     private String name;
-    
-    
-    @Column(name="ent_year",length = 10, nullable = true)
-    private Integer entYear;
-    
-    
-    @Column(name="class_num",length = 3, nullable = true)
-     private String classNum;
-    
-    @Column(name="is_attend", nullable = true)
-    private Boolean isAttend;
-    
     
     @Column(name="school_cd", length = 4,nullable = true)
     private String schoolCd;
     
-//    @Column(nullable = true)
-//    private Integer age;
-
+    @Column(name="cd",length = 3, nullable = true)
+     private String cd;
+   
 }
+
