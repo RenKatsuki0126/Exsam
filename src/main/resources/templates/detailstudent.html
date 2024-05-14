@@ -6,12 +6,11 @@
 <!-- ここにCSSをリンクさせる -->
 
 <!-- 例 -->
-<link rel="stylesheet" href="styles.css">
 
 </head>
 <body>
 
-<form class="form py-4 needs-validation h-adr" method="post" th:action="@{/hyouji/{id}(id = *{id})}" th:object="${student}">
+<form class="form py-4 needs-validation h-adr" method="post" th:action="@{/hyoujistudent/{id}(id = *{id})}" th:object="${student}">
     
     <div class="row mt-3">        
     <label for="name" class="col-4 col-form-label text-end">名前</label>

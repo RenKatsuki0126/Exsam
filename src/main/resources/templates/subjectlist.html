@@ -1,0 +1,33 @@
+
+<div th:if="${subjectList != null and not #lists.isEmpty(subjectList)}">
+    <table>
+        <thead>
+        <tr>
+            <th>科目コード</th>
+            <th>科目名</th>
+            <th>学校コード</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="subject : ${subjectList}">
+            <td th:text="${subject.cd}"></td>
+            <td th:text="${subject.name}"></td>
+            <td th:text="${subject.schoolCd}"></td>
+            
+           <td>
+           	  <a class="btn btn-warning" th:href="@{/hyoujisubject/{id}(id=${subject.id})}">変更</a>
+			  <a class="btn btn-warning" th:href="@{/hyoujisubject/{id}(id=*{subject.id})}">削除</a>
+		   </td>
+        </tr>
+        
+       
+        </tbody>
+    </table>
+</div>
+<a href="/createsubject/">科目を入力する</a>
+<a href="/">トップに戻る</a>
+<div th:unless="${subjectList != null and not #lists.isEmpty(subjectList)}">
+    <p>データなし</p>
+</div>
+<a href="/createstudent/">学生情報を入力する</a>
+ 

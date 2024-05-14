@@ -1,0 +1,103 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<form class="form py-4 needs-validation h-adr" method="post" th:action="@{/seisekikanri}" th:object="${student}">
+        <label >入学年度</label>
+        
+		<div class="col-4">
+			
+    		<select name="entYear" class="form-control">
+        		<option value="2019">2019</option>
+        		<option value="2020">2020</option>
+        		<option value="2021">2021</option>
+        		<option value="2022">2022</option>
+    		</select>
+    		
+		</div>
+		
+		
+		 <label>クラス</label>
+        
+		<div class="col-4">
+			
+    		<select name="classNum" class="form-control">
+        		<option value="101">101</option>
+        		<option value="102">102</option>
+        		<option value="103">103</option>
+        		<option value="104">104</option>
+        		<option value="105">105</option>
+        		<option value="106">106</option>
+        		<option value="107">107</option>
+        		<option value="108">108</option>
+        		<option value="109">109</option>
+    		</select>
+    		
+		</div>
+		
+		 <label>科目</label>
+        
+		<div class="col-4">
+			
+    		<select name="subject">
+        		<option value="" disabled selected>科目を選択してください</option>
+        		<th:block th:each="subject : ${subject}">
+					<option th:text="${subject.name}"></option>
+				</th:block>
+    		</select>
+    		
+		</div>
+		
+		<label >回数</label>
+        
+		<div class="col-4">
+			
+    		<select name="count" class="form-control">
+        		<option value="1">1</option>
+        		<option value="2">2</option>
+    		</select>
+    		
+		</div>
+
+
+
+	
+	<div class="col-4">
+	<input type="submit" value="送信する">
+	</form>
+	<form class="form py-4 needs-validation h-adr" method="post" th:action="@{/tourokukanryou}" >
+
+<!--	<form method="post" th:action="@{/tourokukanryou}">-->
+			<h3><span th:text="${subjectname}"></span><span th:text="${count}"></span></h3>
+	<table border="1">
+		<thead>
+			<tr>
+				<th>入学年度</th>
+				<th>クラス番号</th>
+				<th>学生番号</th>
+				<th>学生名</th>
+				<th>点数</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="item : ${studentList}">
+					<td th:text="${item.entYear}"></td>
+					<td th:text="${item.classNum}"></td>
+					<td th:text="${item.no}"></td>
+					<td th:text="${item.name}"></td>
+					<td>
+						<input type="number" name="point">
+					</td>
+					<input type="hidden" name="studentNo"th:value="${item.no}">
+					<input type="hidden" name="subjectCd"th:value="${subjectcd}">
+<!--					<input type="hidden" name="schoolCd"th:value="${schoolCd}">-->
+					<input type="hidden" name="no"th:value="${no}">
+					<input type="hidden" name="classNum"th:value="${item.classNum}">
+			</tr>
+		</tbody>
+ 
+コンテキスト メニューあり
+	<a href="/">戻る</a>
+</div>
+<input type="submit" value="送信する">
+</form>

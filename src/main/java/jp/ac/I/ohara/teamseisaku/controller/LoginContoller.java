@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/")
 public class LoginContoller {
-
+	
     /**
      * ログイン画面へ遷移します.
      *
@@ -25,3 +25,4 @@ public class LoginContoller {
         return "login";
     }
 }
+

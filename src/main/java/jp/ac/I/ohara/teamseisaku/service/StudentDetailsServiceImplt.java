@@ -9,13 +9,10 @@ import org.springframework.stereotype.Service;
 import jp.ac.I.ohara.teamseisaku.model.Teacher;
 import jp.ac.I.ohara.teamseisaku.repository.Teacherrepository;
 
-
 @Service
 public class StudentDetailsServiceImplt implements UserDetailsService {
-
     @Autowired
     private Teacherrepository userRepository; // ユーザモデルのRepository
-
     /**
      * ユーザの検索を行う
      */

@@ -3,6 +3,7 @@ package jp.ac.I.ohara.teamseisaku.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,20 @@ public class Studentservice {
 
 	@Autowired
 	private Student_repository repository;
+	
+	@Autowired
+	Student_repository rep;
+	 
+	public List<Studentmodel> getList(String no, Boolean isAttend) {
+	  List<Studentmodel> list = rep.findAll(Specification
+	    .where(Student_repository.userNameContains(no)
+	  	.and(Student_repository.isAttendContains(isAttend))));
+	    // 複数項目の場合は.and(),.or()でつなげる
+	 
+	  	return list;
+	}
+	
+	
 
 	/**
 	 * アドレス帳一覧の取得
@@ -70,6 +85,14 @@ public class Studentservice {
         this.repository.save(editStudent);
         System.out.println("aaa");
     }
+
+ 
+	public List<Studentmodel> searchStudents2(Integer entYear, String classNum) {
+		// TODO 自動生成されたメソッド・スタブ
+		return repository.findByEntYearAndClassNum(entYear, classNum);
+		
+	}
+ 
    
 
 

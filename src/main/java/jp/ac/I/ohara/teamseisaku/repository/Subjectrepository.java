@@ -7,5 +7,6 @@ import jp.ac.I.ohara.teamseisaku.model.Subjectmodel;
 
 @Repository
 public interface Subjectrepository extends JpaRepository<Subjectmodel, Long> {
-
+	Subjectmodel findByname(String name);
+	
 }

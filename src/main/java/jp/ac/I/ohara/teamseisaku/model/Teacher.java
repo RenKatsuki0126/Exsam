@@ -37,7 +37,7 @@ public class Teacher implements UserDetails {
 	 private String name;
 
 	 @Column(name="school_cd",length = 3, nullable = true)
-	 private String schoolCd; 
+	 private String schoolCd;
 	 
 	 /**
       * 権限を返す

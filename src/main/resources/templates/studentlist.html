@@ -14,11 +14,11 @@
             <td th:text="${student.entYear}"></td>
             <td th:text="${student.no}"></td>
             <td th:text="${student.name}"></td>
-            <td th:text="${student.classNum}"></td>
+            <td th:text="${student.schoolCd}"></td>
             
            <td>
            	  <a class="btn btn-warning" th:href="@{/hyoujistudent/{id}(id=${student.id})}">変更</a>
-			  <a class="btn btn-warning" th:href="@{/delete/{id}(id=*{student.id})}">削除</a>
+			  <a class="btn btn-warning" th:href="@{/deletestudent/{id}(id=*{student.id})}">削除</a>
 		   </td>
         </tr>
         

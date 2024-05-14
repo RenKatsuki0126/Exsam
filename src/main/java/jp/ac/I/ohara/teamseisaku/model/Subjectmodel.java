@@ -27,6 +27,6 @@ public class Subjectmodel {
     
     @Column(name="cd",length = 3, nullable = true)
      private String cd;
-   
+    
 }
 

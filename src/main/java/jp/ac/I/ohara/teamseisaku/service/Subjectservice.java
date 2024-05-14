@@ -23,7 +23,7 @@ public class Subjectservice {
 		 * アドレス帳一覧の取得
 		 * @return List<oharabank>
 		 */
-		public List<Subjectmodel> getStudentList() {
+		public List<Subjectmodel> getSubjectList() {
 		    List<Subjectmodel> entityList = this.repository.findAll();
 		    return entityList;
 		}
@@ -71,10 +71,12 @@ public class Subjectservice {
 	        this.repository.save(editSubject);
 	        System.out.println("aaa");
 	    }
-	   
-
-
-	    public Subjectmodel getStudent(Long id) {
+	    
+	    public String getsubjectcd(String name) {
+	    	Subjectmodel subject = this.repository.findByname(name);
+	    	return subject.getSchoolCd();
+	    }
+	    public Subjectmodel getSubject(Long id) {
 	    	Subjectmodel subject = this.repository.findById(id).orElse(null);
 	    	return subject;
 	    	}
