@@ -37,7 +37,7 @@ public class MainController {
 	@Autowired
 	private Testservice testservice;
 	
-	@GetMapping("/top/")
+	@GetMapping("/")
 	  public String index(Model model) {
 	    model.addAttribute("Hello", "World");
 	    return "top";
@@ -51,17 +51,20 @@ public class MainController {
 	}
 	
 	@PostMapping("/createstudent/")
-	public String student(@Validated @ModelAttribute @NonNull Studentmodel studentmodel, RedirectAttributes result,
-		RedirectAttributes redirectAttributes) {
-		try {
-			this.student_service.save(studentmodel);
-			System.out.print(12);		
-			redirectAttributes.addFlashAttribute("exception", "");
-			} catch (Exception e) {
-				redirectAttributes.addFlashAttribute("exception", e.getMessage());
-				}
-		return "redirect:/";
-		}
+	public String student(@Validated @ModelAttribute @NonNull Studentmodel studentmodel, RedirectAttributes redirectAttributes) {
+	    try {
+	        // 学籍番号の重複チェック
+	        if (student_service.existsByNo(studentmodel.getNo())) {
+	            throw new Exception("学籍番号が重複しています。");
+	        }
+ 
+	        this.student_service.save(studentmodel);
+	        redirectAttributes.addFlashAttribute("successMessage", "学生が登録されました。");
+	    } catch (Exception e) {
+	        redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+	    }
+	    return "redirect:/";
+	}
 	
 	//削除
 	@GetMapping("/deletestudent/{id}")
@@ -215,5 +218,5 @@ public class MainController {
 					redirectAttributes.addFlashAttribute("exception", e.getMessage());
 					}
 			return "redirect:/tourokukanryou";
-}
+			}
 }

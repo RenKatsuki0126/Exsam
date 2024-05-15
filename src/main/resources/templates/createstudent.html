@@ -1,22 +1,131 @@
-<html>
+<!DOCTYPE html>
+<html lang="ja">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<form class="form py-4 needs-validation h-adr" method="post" th:action="@{/createstudent/}" th:object="${student}">
-	    
-	<div class="row mt-3">        
-	<label for="name" class="col-4 col-form-label text-end">名前</label>
-	<div class="col-4">
-		<input type="text" class="form-control" id="name" name="name" th:field="*{name}" th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : 'is-valid'" />
-	<divvf="${#fields.hasErrors('name')}" th:errors="*{name}" class="invalid-feedback">errors!
-	</div>
-　	</div>    
-	</div>
-        <label for="school_cd" class="col-4 col-form-label text-end">クラス</label>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f9fa;
+    }
+    
+    .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .form-group {
+        margin-bottom: 20px;
+    }
+    
+    .form-label {
+        font-weight: bold;
+    }
+    
+    .form-control {
+        width: 30%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    
+    .invalid-feedback {
+        color: #dc3545;
+        font-size: 14px;
+    }
+    
+    .btn {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    
+    .btn:hover {
+        background-color: #0056b3;
+    }
+    
+    .link {
+        margin-top: 20px;
+        font-size: 14px;
+        color: #007bff;
+        text-decoration: none;
+    }
+</style>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // 学籍番号の入力フィールドを取得
+        var studentNoInput = document.getElementById("no");
+ 
+        // 入力内容が変更された時に重複をチェックするイベントリスナーを追加
+        studentNoInput.addEventListener("input", function() {
+            var studentNoValue = studentNoInput.value;
+ 
+            // 学籍番号の重複をチェックするAPIエンドポイントのURL
+            var checkDuplicateUrl = "/checkDuplicateStudentNo?no=" + studentNoValue;
+ 
+            // AJAXリクエストを使用して重複チェックを行う
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", checkDuplicateUrl, true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        // レスポンスから重複チェック結果を取得
+                        var response = xhr.responseText;
+                        var isDuplicate = JSON.parse(response).duplicate;
+ 
+                        // 重複がある場合はエラーメッセージを表示
+                        if (isDuplicate) {
+                            document.getElementById("no-error").innerText = "この学籍番号はすでに使用されています。";
+                        } else {
+                            // 重複がない場合はエラーメッセージをクリア
+                            document.getElementById("no-error").innerText = "";
+                        }
+                    }
+                }
+            };
+            xhr.send();
+        });
+    });
+</script>
+</head>
+<body>
+<form class="form py-4 needs-validation h-adr" method="post" th:action="@{/createstudent}" th:object="${student}">
+    <div class="row mt-3">        
+        <label for="name" class="col-4 col-form-label text-end">名前</label>
+        <div class="col-4">
+            <input type="text" class="form-control" id="name" name="name" th:field="*{name}" required />
+        </div>    
+    </div>
+    
+    <div class="row mt-3">        
+        <label for="no" class="col-4 col-form-label text-end">学籍番号</label>
+        <div class="col-4">
+            <input type="text" class="form-control" id="no" name="no" th:field="*{no}" required />
+            <div id="no-error" class="invalid-feedback"></div> <!-- 重複エラーメッセージの表示領域 -->
+        </div>    
+    </div>
+    
+    <div class="row mt-3">        
+        <label for="entYear" class="col-4 col-form-label text-end">入学年度</label>
+        <div class="col-4">
+            <input type="text" class="form-control" id="entYear" name="entYear" th:field="*{entYear}" required />
+        </div>
+    </div>
+ 
+    <label for="class_num" class="col-4 col-form-label text-end">クラス</label>
         
 		<div class="col-4">
 			
-    		<select name="schoolCd" class="form-control"th:field="*{schoolCd}">
+    		<select name="classNum" class="form-control"th:field="*{classNum}">
         		<option value="101">101</option>
         		<option value="102">102</option>
         		<option value="103">103</option>
@@ -29,29 +138,10 @@
     		</select>
     		
 		</div>
-
-	
-	<div class="row mt-3">        
-	<label for="no" class="col-4 col-form-label text-end">学籍番号</label>
-	<div class="col-4">
-	<input type="text" class="form-control" id="no" name="no" th:field="*{no}" th:classappend="${#fields.hasErrors('no')} ? 'is-invalid' : 'is-valid'" />
-	<divvf="${#fields.hasErrors('no')}" th:errors="*{no}" class="invalid-feedback">errors!
-　　</div>
-　</div>    
-	</div>
-	
-	<div class="row mt-3">        
-	<label for="entYear" class="col-4 col-form-label text-end">入学年度</label>
-	<div class="col-4">
-	<input type="entYear" class="form-control" id="entYear" name="entYear" th:field="*{entYear}" th:classappend="${#fields.hasErrors('entYear')} ? 'is-invalid' : 'is-valid'" />
-	<divvf="${#fields.hasErrors('entYear')}" th:errors="*{entYear}" class="invalid-feedback">errors!
-　　</div>
-　	</div>    
-	</div>
-	<div class="col-4">
-	<input type="submit" value="送信する">
-	<a href="/">戻る</a>
-</div>
-　　</div>
-　</div>
-</form>
+    
+    <div class="row mt-3">
+        <div class="col-4">
+            <input type="submit" value="送信する">
+            <a href="/">戻る</a>
+        </div>
+ 

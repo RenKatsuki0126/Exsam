@@ -1,6 +1,7 @@
 package jp.ac.I.ohara.teamseisaku.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -24,5 +25,11 @@ public class LoginContoller {
         }
         return "login";
     }
+    @GetMapping("/logout/")
+        public String logout() {
+            // ログアウト処理を行う
+            // ここでセッションを無効化したり、必要なクリア処理を行います
+            return "logout"; // logout.html を表示させる
+        }
 }
 

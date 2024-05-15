@@ -1,34 +1,47 @@
-
 <div th:if="${studentList != null and not #lists.isEmpty(studentList)}">
-    <table>
-        <thead>
-        <tr>
-            <th>入学年度</th>
-            <th>学生番号</th>
-            <th>学生名</th>
-            <th>クラス番号</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="student : ${studentList}">
-            <td th:text="${student.entYear}"></td>
-            <td th:text="${student.no}"></td>
-            <td th:text="${student.name}"></td>
-            <td th:text="${student.schoolCd}"></td>
-            
-           <td>
-           	  <a class="btn btn-warning" th:href="@{/hyoujistudent/{id}(id=${student.id})}">変更</a>
-			  <a class="btn btn-warning" th:href="@{/deletestudent/{id}(id=*{student.id})}">削除</a>
-		   </td>
-        </tr>
-        
-       
-        </tbody>
-    </table>
+    <div style="overflow-x: auto; background-color: #f8f9fa; border: 1px solid #ccc; border-radius: 4px; padding: 10px;">
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="background-color: #007bff; color: #fff;">
+                    <th>入学年度</th>
+                    <th>学生番号</th>
+                    <th>学生名</th>
+                    <th>クラス番号</th>
+                    <th>在学中フラグ</th>
+                    <th>変更</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="student : ${studentList}" style="background-color: #fff;">
+                    <td th:text="${student.entYear}"></td>
+                    <td th:text="${student.no}"></td>
+                    <td th:text="${student.name}"></td>
+                    <td th:text="${student.classNum}"></td>
+                    <td th:text="${student.isAttend}"></td>
+                    <td>
+                        <a class="btn btn-warning" th:href="@{/hyouji/{id}(id=${student.id})}" style="text-decoration: none; color: rgb(0, 0, 0);">変更</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
-<a href="/">トップに戻る</a>
+ 
 <div th:unless="${studentList != null and not #lists.isEmpty(studentList)}">
     <p>データなし</p>
 </div>
-<a href="/createstudent/">学生情報を入力する</a>
+ 
+<a href="/" style="display: block; margin-top: 20px; color: #007bff; text-decoration: none;">トップに戻る</a>
+ 
+<div style="margin-top: 20px;">
+    <a href="/createstudent" class="btn btn-primary">学生情報を入力する</a>
+</div>
+ 
+<!-- 検索フォーム -->
+<form th:action="@{/studentlist/}" method="post" th:object="${studentList}" style="margin-top: 20px;">
+    <input type="text" name="no" placeholder="学生番号を入力" style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+    <input type="checkbox" name="isAttend" id="isAttend">
+    <label for="isAttend" style="margin-left: 5px;">在学中</label>
+    <button type="submit" class="btn btn-success" style="margin-left: 5px;">検索</button>
+</form>
  

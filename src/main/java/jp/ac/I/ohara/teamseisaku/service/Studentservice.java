@@ -21,6 +21,7 @@ public class Studentservice {
 	
 	@Autowired
 	Student_repository rep;
+	
 	 
 	public List<Studentmodel> getList(String no, Boolean isAttend) {
 	  List<Studentmodel> list = rep.findAll(Specification
@@ -58,6 +59,7 @@ public class Studentservice {
 	 */
 	public void save(Studentmodel studentmodel) {
 		System.out.println(studentmodel);
+		//studentmodel.setIsAttend(ture);
 		this.repository.save(studentmodel);
 	}
 
@@ -79,8 +81,6 @@ public class Studentservice {
     public void update(Studentmodel editStudent) {
         // データベースに登録する値を保持するインスタンスの作成
         System.out.println(editStudent);
-       
-        
         // データベースを更新する
         this.repository.save(editStudent);
         System.out.println("aaa");
@@ -92,12 +92,20 @@ public class Studentservice {
 		return repository.findByEntYearAndClassNum(entYear, classNum);
 		
 	}
- 
-   
-
-
-public Studentmodel getStudent(Long id) {
-	Studentmodel student = this.repository.findById(id).orElse(null);
-	return student;
-}
-}
+	public Studentmodel getStudent(Long id) {
+		Studentmodel student = this.repository.findById(id).orElse(null);
+		return student;
+		}
+	public List<Studentmodel> search(String keyword) {
+	// TODO 自動生成されたメソッド・スタブ
+		return null;
+		}
+	public boolean existsByNo(String no) {
+	// TODO 自動生成されたメソッド・スタブ
+		return false;
+		}
+	public boolean checkDuplicateStudentNo(String no) {
+	// TODO 自動生成されたメソッド・スタブ
+		return false;
+		}
+	}
