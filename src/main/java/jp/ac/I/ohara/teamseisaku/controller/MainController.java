@@ -43,14 +43,14 @@ public class MainController {
 	    return "top";
 	  }
 
-	@GetMapping("/createstudent/")
+	@GetMapping("/createstudent")
 	public ModelAndView add1(Studentmodel studentmodel, ModelAndView model) {
 	      model.addObject("student", studentmodel); 
 	      model.setViewName("createstudent");
 	      return model;
 	}
 	
-	@PostMapping("/createstudent/")
+	@PostMapping("/createstudent")
 	public String student(@Validated @ModelAttribute @NonNull Studentmodel studentmodel, RedirectAttributes redirectAttributes) {
 	    try {
 	        // 学籍番号の重複チェック
@@ -103,14 +103,14 @@ public class MainController {
 	    // 本の一覧画面にリダイレクト
 	    return "redirect:/studentlist";
 	    }
-	@GetMapping("/createsubject/")
+	@GetMapping("/createsubject")
 	public ModelAndView add2(Subjectmodel subjectmodel, ModelAndView model) {
 	      model.addObject("subject", subjectmodel); 
 	      model.setViewName("createsubject");
 	      return model;
 	}
 	
-	@PostMapping("/createsubject/")
+	@PostMapping("/createsubject")
 	public String subject(@Validated @ModelAttribute @NonNull Subjectmodel subjectmodel, RedirectAttributes result,
 		RedirectAttributes redirectAttributes) {	
 		try {

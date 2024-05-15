@@ -9,6 +9,7 @@
                     <th>クラス番号</th>
                     <th>在学中フラグ</th>
                     <th>変更</th>
+                    <th>削除</th>
                 </tr>
             </thead>
             <tbody>
@@ -19,7 +20,10 @@
                     <td th:text="${student.classNum}"></td>
                     <td th:text="${student.isAttend}"></td>
                     <td>
-                        <a class="btn btn-warning" th:href="@{/hyouji/{id}(id=${student.id})}" style="text-decoration: none; color: rgb(0, 0, 0);">変更</a>
+                        <a class="btn btn-warning" th:href="@{/hyoujistudent/{id}(id=${student.id})}" style="text-decoration: none; color: rgb(0, 0, 0);">変更</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-warning" th:href="@{/deletestudent/{id}(id=${student.id})}" style="text-decoration: none; color: rgb(0, 0, 0);">削除</a>
                     </td>
                 </tr>
             </tbody>

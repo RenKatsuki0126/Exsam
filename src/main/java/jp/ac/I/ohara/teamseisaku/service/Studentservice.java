@@ -59,7 +59,7 @@ public class Studentservice {
 	 */
 	public void save(Studentmodel studentmodel) {
 		System.out.println(studentmodel);
-		//studentmodel.setIsAttend(ture);
+		studentmodel.setIsAttend(true);
 		this.repository.save(studentmodel);
 	}
 

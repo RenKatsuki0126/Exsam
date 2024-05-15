@@ -78,22 +78,11 @@ window.addEventListener('load', function() {
 </head>
 <body>
 <div class="container">
-    <form class="form needs-validation" method="post" th:action="@{/createsubject/}" th:object="${subject}" novalidate>
+    <form class="form needs-validation" method="post" th:action="@{/createsubject}" th:object="${subject}" novalidate>
         <div class="form-group row">
             <label for="school_cd" class="col-4 col-form-label text-end">学校コード</label>
             <div class="col-4">
-                <select name="schoolCd" class="form-control" th:field="*{schoolCd}" required>
-                    <option value="">選択してください</option>
-                    <option value="2018">2018</option>
-                    <option value="2019">2019</option>
-                    <option value="2020">2020</option>
-                    <option value="2021">2021</option>
-                    <option value="2022">2022</option>
-                    <option value="2023">2023</option>
-                    <option value="2024">2024</option>
-                    <option value="2025">2025</option>
-                    <option value="2026">2026</option>
-                </select>
+                <input type="text" class="form-control" id="schoolCd" name="schoolCd" th:field="*{schoolCd}" th:classappend="${#fields.hasErrors('schoolCd')} ? 'is-invalid' : 'is-valid'" required />
                 <div th:if="${#fields.hasErrors('schoolCd')}" class="invalid-feedback">
                     <span th:errors="*{schoolCd}"></span>
                 </div>
